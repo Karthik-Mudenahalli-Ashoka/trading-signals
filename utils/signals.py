@@ -10,6 +10,8 @@ import yfinance as yf
 def fetch_data(ticker: str, period: str = "1y", interval: str = "1d") -> pd.DataFrame:
     """Download OHLCV data from Yahoo Finance."""
     df = yf.download(ticker, period=period, interval=interval, auto_adjust=True, progress=False)
+    if df.empty:
+        raise ValueError(f"No data found for ticker {ticker}")
     df.dropna(inplace=True)
     # Flatten multi-level columns if present
     if isinstance(df.columns, pd.MultiIndex):

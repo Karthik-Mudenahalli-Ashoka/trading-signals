@@ -67,6 +67,9 @@ def load(ticker, period):
 
 try:
     df = load(ticker, period)
+    if df is None or len(df) < 2:
+        st.error(f"Could not load enough data for **{ticker}**. Try a longer time period.")
+        st.stop()
 except Exception as e:
     st.error(f"Could not load data for **{ticker}**. Check the ticker and try again.")
     st.stop()
