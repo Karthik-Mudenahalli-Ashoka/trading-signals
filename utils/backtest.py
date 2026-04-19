@@ -76,10 +76,10 @@ def run_backtest(df: pd.DataFrame, initial_capital: float = 10000.0) -> dict:
             "win_rate":       round(win_rate(market_ret), 2),
             "final_value":    round(df["market_equity"].iloc[-1], 2),
         },
-        "equity_curve": df[["date", "close", "market_equity",
+        "equity_curve": df[["close", "market_equity",
                              "strategy_equity", "position"]].copy(),
         "trades": df[df["position"].diff() != 0][
-            ["date", "close", "position"]
+            ["close", "position"]
         ].copy(),
     }
 
